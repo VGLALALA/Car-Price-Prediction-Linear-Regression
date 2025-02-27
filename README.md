@@ -1,27 +1,36 @@
-Car Price Prediction Model
-This repository contains a deep learning model for car price prediction, progressing through multiple improvements from a basic linear model to an optimized architecture with dropout and batch normalization.
+# Car Price Prediction Model
 
-1. Data Preparation
+## 1. Data Preparation
+
 The dataset is loaded from a CSV file.
 Some columns (like running) are cleaned and normalized.
 Categorical features (e.g., color, type, status, model, motor_type) are one-hot encoded.
 The wheel column is set to 1 for all rows.
 Independent (X) and dependent (y) variables are extracted for training.
-2. Model Evolution
-Step 1: Basic Linear Model
+
+## 2. Model Evolution
+
+### Basic Linear Model
+
 The first approach was a simple linear regression model using torch.nn.Linear.
 This model had limited capacity and struggled with complex relationships in the data.
-Step 2: Adding Adam Optimizer
+
+### Adding Adam Optimizer
+
 The optimization strategy was improved by replacing the standard gradient descent with the Adam optimizer.
 Adam provides adaptive learning rates, which help the model converge faster.
-Step 3: Increasing Model Complexity (Linear Layers 32 & 64)
+
+### Increasing Model Complexity (Linear Layers 32 & 64)
+
 The model was expanded to include multiple fully connected (Linear) layers:
 First layer: 64 neurons
 Second layer: 32 neurons
 Third layer: 16 neurons
 Output layer: 1 neuron (predicting price)
 ReLU activation was used to introduce non-linearity.
-Step 4: Adding Dropout and Batch Normalization
+
+### Adding Dropout and Batch Normalization
+
 Batch Normalization (BatchNorm1d) was introduced after each linear layer to stabilize training and accelerate convergence.
 
 Dropout layers (Dropout(0.3)) were added to prevent overfitting by randomly disabling neurons during training.
