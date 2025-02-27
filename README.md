@@ -27,6 +27,7 @@ else:
 
 df = pd.read_csv(path/'train.csv')
 ```
+![df](1.png)
 
 ### **Feature Selection**
 
@@ -92,6 +93,7 @@ df = dataNormalize(df)
 
 The dataset now contains **42 processed columns** after normalization and feature engineering.
 
+![after_normalize](2.png)
 ---
 
 ## 🏗️ Model Evolution
@@ -230,7 +232,7 @@ def train_model(epochs=800, lr=0.001):
         losses.append(loss)
     return coeffs
 ```
-
+![Loss Graph](3.png)
 ---
 
 ## Final Result
