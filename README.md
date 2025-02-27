@@ -70,24 +70,7 @@ This repository contains a deep learning model for car price prediction, progres
 ## 3. Mean Squared Error (MSE) Loss
 
 Loss is computed as:
-The **Mean Squared Error (MSE) Loss** function is used as the loss metric for this model. It measures the squared difference between predictions (`x`) and true values (`y`). The unreduced (i.e., with `reduction='none'`) loss is computed as:
-
-\[\ell(x, y) = L = \{ l_1, l_2, ..., l_N \}^T, \quad l_n = (x_n - y_n)^2\]
-
-where \( N \) is the batch size.
-
-If `reduction` is set to a value other than `'none'` (default is `'mean'`), then:
-
-\[\ell(x, y) =
-egin{cases} 
-	ext{mean}(L), & 	ext{if reduction} = 'mean' \ 
-	ext{sum}(L), & 	ext{if reduction} = 'sum' 
-\end{cases}\]
-
-- **Mean (`'mean'`)**: The operation divides the total loss by \( N \), ensuring loss values remain normalized.
-- **Sum (`'sum'`)**: The loss is computed as the sum of all squared differences without division by \( N \).
-
-To avoid division by \( N \), one can set `reduction='sum'`.
+[MSELoss](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html)
 
 The loss is computed in the training loop as follows:
 
