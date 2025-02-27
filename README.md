@@ -79,7 +79,7 @@ Epochs: The model was trained for 800 epochs.
 
 Training loop:
 
-```
+```python
 def train_model(epochs=800, lr=0.001):
     torch.manual_seed(442)
     coeffs = init_coeffs()
@@ -93,7 +93,7 @@ def train_model(epochs=800, lr=0.001):
 
 Predictions are generated using:
 
-```
+```python
 def calc_preds(coeffs, indeps, denormalize=False):
     preds = coeffs(indeps)
     if denormalize:
@@ -102,8 +102,18 @@ def calc_preds(coeffs, indeps, denormalize=False):
 ```
 
 Loss is computed as:
+The Mean Squared Error (MSE) Loss function is used as the loss metric for this model. It measures the squared difference between predictions (x) and true values (y). The unreduced (i.e., with reduction='none') loss is computed as:
 
-```
+ℓ(𝑥,𝑦)=𝐿={𝑙1,𝑙2,...,𝑙𝑁}𝑇,𝑙𝑛=(𝑥𝑛−𝑦𝑛)2
+where 𝑁 is the batch size. 
+If reduction is set to a value other than 'none' (default is 'mean'), then:
+ℓ(x,y)=L={l 1 ,l 2 ,...,l N } T ,l n =(x n −y n ) 2 
+
+ℓ(𝑥,𝑦)={mean(𝐿),if reduction=′𝑚𝑒𝑎𝑛′sum(𝐿),if reduction=′𝑠𝑢𝑚′ℓ(x,y)={ mean(L),sum(L),if reduction= ′ mean ′if reduction= ′ sum ′
+ 
+Mean ('mean'): The operation divides the total loss by 𝑁N, ensuring loss values remain normalized.Sum ('sum'): The loss is computed as the sum of all squared differences without division by 𝑁N.To avoid division by 𝑁N, one can set reduction='sum'.
+
+```python
 def calc_loss(coeffs, indeps, deps): 
     preds = calc_preds(coeffs, indeps, denormalize=False)
     return torch.nn.functional.mse_loss(preds, deps.view(-1, 1))
