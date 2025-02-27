@@ -2,25 +2,26 @@
 
 This repository contains a deep learning model for car price prediction, progressing through multiple improvements from a basic linear model to an optimized architecture with dropout and batch normalization.
 
-## 1. Data Preparation
+## Data Preparation
 
 - The dataset is loaded from a CSV file.
 - Some columns (like `running`) are cleaned and normalized.
-- Categorical features (e.g., `color`, `type`, `status`, `model`, `motor_type`) are one-hot encoded.
+- Categorical features (e.g., `color_brown`, `color_red`,`Sedan`, `Excellent`, `Mercedes`, `Gas`) are one-hot encoded.
 - The `wheel` column is set to `1` for all rows.
 - Independent (`X`) and dependent (`y`) variables are extracted for training.
+- Created in total of 42 columns 
 
-## 2. Model Evolution
+## Model Evolution
 
-### **Step 1: Basic Linear Model**
+### **Basic Linear Model**
 - The first approach was a simple linear regression model using `torch.nn.Linear`.
 - This model had limited capacity and struggled with complex relationships in the data.
 
-### **Step 2: Adding Adam Optimizer**
+### **Adding Adam Optimizer**
 - The optimization strategy was improved by replacing the standard gradient descent with the **Adam optimizer**.
 - Adam provides adaptive learning rates, which help the model converge faster.
 
-### **Step 3: Increasing Model Complexity (Linear Layers 32 & 64)**
+### **Increasing Model Complexity (Linear Layers 32 & 64)**
 - The model was expanded to include multiple fully connected (`Linear`) layers:
   - **First layer:** 64 neurons
   - **Second layer:** 32 neurons
@@ -28,7 +29,7 @@ This repository contains a deep learning model for car price prediction, progres
   - **Output layer:** 1 neuron (predicting price)
 - **ReLU activation** was used to introduce non-linearity.
 
-### **Step 4: Adding Dropout and Batch Normalization**
+### **Adding Dropout and Batch Normalization**
 - **Batch Normalization (`BatchNorm1d`)** was introduced after each linear layer to stabilize training and accelerate convergence.
 - **Dropout layers (`Dropout(0.3)`)** were added to prevent overfitting by randomly disabling neurons during training.
 - The final architecture is as follows:
@@ -67,7 +68,7 @@ This repository contains a deep learning model for car price prediction, progres
           return self.fc4(x)  
   ```
 
-## 3. Mean Squared Error (MSE) Loss
+## Mean Squared Error (MSE) Loss
 
 Loss is computed as:
 [MSELoss](https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html)
@@ -80,10 +81,10 @@ def calc_loss(coeffs, indeps, deps):
     return torch.nn.functional.mse_loss(preds, deps.view(-1, 1))
 ```
 
-## 4. Training Process
+## Training Process
 - **Loss function**: Mean Squared Error (MSE) was used to measure prediction accuracy.
 - **Optimizer**: Adam optimizer with a learning rate of `0.001`.
-- **Epochs**: The model was trained for 800 epochs.
+- **Epochs**: The model was trained for 800 epochs. More will be overfitting, less will be underfitting
 - Training loop:
 
   ```python
@@ -97,7 +98,7 @@ def calc_loss(coeffs, indeps, deps):
       return coeffs
   ```
 
-## 5. Prediction & Loss Calculation
+## Prediction & Loss Calculation
 - Predictions are generated using:
 
   ```python
@@ -108,5 +109,3 @@ def calc_loss(coeffs, indeps, deps):
       return preds
   ```
 
-## 6. Conclusion
-This model was improved step-by-step from a basic linear model to a more complex deep learning architecture with batch normalization and dropout, allowing for better generalization and improved performance.
