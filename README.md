@@ -234,4 +234,4 @@ def train_model(epochs=800, lr=0.001):
 ---
 
 ## Final Result
-[Final Result](4.png)
+![Final Result](4.png)
